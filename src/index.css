@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.question{
+    resize: none;
+}
+
+.btn-create{
+    border-color: #0EA5E9;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+}

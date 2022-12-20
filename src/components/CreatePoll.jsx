@@ -35,7 +35,7 @@ function CreatePoll() {
             <span className="text-sky-500 text-xl font-extrabold"> + </span>{" "}
           </button>
           <button
-            className="  btn-create border-2 rounded-md py-2 px-3 font-medium underline "
+            className="  btn-create text-red-500 border-2 rounded-md py-2 px-3 font-medium underline "
             type="submit"
           >
             Create Poll

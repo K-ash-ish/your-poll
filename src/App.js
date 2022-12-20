@@ -8,6 +8,7 @@ function App() {
     <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
       <Header />
       <CreatePoll />
+      <YourPoll />
     </div>
   );
 }

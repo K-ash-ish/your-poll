@@ -1,16 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.header{
-    background-color: #cbe9f9;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap");
+body {
+  font-family: "Roboto", sans-serif;
+}
+.header {
+  background-color: #cbe9f9;
 }
 .question {
   resize: none;
 }
 
 .btn-create {
-  border-color: #0ea5e9;
+  border-color: black;
   text-underline-offset: 5px;
   text-decoration-thickness: 2px;
 }

@@ -2,12 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.question{
-    resize: none;
+.header{
+    background-color: #cbe9f9;
+}
+.question {
+  resize: none;
 }
 
-.btn-create{
-    border-color: #0EA5E9;
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
+.btn-create {
+  border-color: #0ea5e9;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+/* .poll{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+} */
+.btn-vote {
+  color: #0383c8;
 }

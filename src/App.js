@@ -8,9 +8,9 @@ function App() {
   return (
     <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
       <Header />
+      <CreatePoll />
+      <YourPoll />
       <Result />
-      {/* <CreatePoll /> */}
-      {/* <YourPoll /> */}
     </div>
   );
 }

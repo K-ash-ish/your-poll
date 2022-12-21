@@ -29,13 +29,16 @@ function CreatePoll() {
         <div className=" w-3/4 mb-8 md:w-1/2 flex justify-between">
           <button
             onClick={addOptions}
-            className="  btn-add border-2 rounded-md py-1 px-3 text-sm md:font-medium "
+            className=" tracking-wide btn-add border-2 rounded-md py-1 px-3 text-sm md:font-medium flex justify-center items-center cursor-cell hover:border-black duration-300 ease-in"
           >
             More Options{" "}
-            <span className="text-sky-500 text-xl font-extrabold"> + </span>{" "}
+            <span className="ml-1 text-sky-500 text-xl font-extrabold ">
+              {" "}
+              +{" "}
+            </span>{" "}
           </button>
           <button
-            className="  btn-create text-red-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline "
+            className="  btn-create tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "
             type="submit"
           >
             Create Poll

@@ -4,7 +4,7 @@ function Result() {
     const { option, vote } = props;
     return (
       <div className="option-result m-4 p-2 border-2 ">
-        <div className="option font-medium">{option}</div>
+        <div className="md:text-xl border-b-2 option font-medium">{option}</div>
         <div className="votes font-bold m-2">
           <span className="text-sky-500">Votes: </span>
           {vote}
@@ -17,10 +17,10 @@ function Result() {
   }
   return (
     <div className="result-container border-2 w-full  my-10 flex flex-col justify-center  items-center">
-      <h2 className="text-2xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
+      <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
         Result
       </h2>
-      <div className="results w-4/5 min-h-max border-2 border-cyan-100 rounded flex flex-col">
+      <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
         <OptionResult vote="24" option="Height is 1.24." />
         <OptionResult vote="24" option="Height is 1.10." />
         <OptionResult vote="24" option="Height is 1.54." />

@@ -1,6 +1,6 @@
 import React from "react";
 function VoteFor(props) {
-  const { optionNO, option } = props;
+  const { option } = props;
   return (
     <div className="options my-4 border-b-2 border-slate-100">
       <div className="option md:text-xl  flex items-center  pb-4">

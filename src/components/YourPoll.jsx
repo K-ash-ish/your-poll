@@ -7,10 +7,10 @@ function YourPoll() {
         <p className=" border-b-4 border-red-400 tracking-wide leading-relaxed md:text-2xl text-xl pb-2 px-2 mb-10 md:mb-14">
           What is your height?
         </p>
-        <VoteFor optionNO="1" option="Height is 1.2m" />
-        <VoteFor optionNO="2" option="Height is 1.0m" />
-        <VoteFor optionNO="3" option="Height is 1.1m" />
-        <VoteFor optionNO="4" option="Height is 1.4m" />
+        <VoteFor option="Height is 1.2m" />
+        <VoteFor option="Height is 1.0m" />
+        <VoteFor option="Height is 1.1m" />
+        <VoteFor option="Height is 1.4m" />
       </div>
     </div>
   );

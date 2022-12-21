@@ -24,3 +24,7 @@ body {
 }
 .btn-vote {
 }
+
+.result-container{
+  height: 580px;
+}

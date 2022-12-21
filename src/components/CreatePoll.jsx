@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Options from "./Options";
 function CreatePoll() {
   const [options, setOptions] = useState([1, 2]);
-  const [poll, setPoll] = useState({
-    question: "",
-    options: {},
-  });
+  // const [poll, setPoll] = useState({
+  //   question: "",
+  //   options: {},
+  // });
   function addOptions(event) {
     event.preventDefault();
     setOptions((prevValue) => {

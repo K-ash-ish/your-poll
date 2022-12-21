@@ -14,28 +14,28 @@ function CreatePoll() {
     });
   }
   return (
-    <div className="w-full h-screen border-2 ">
+    <div className="w-full min-h-screen border-2  ">
       <form action="" className="my-10 flex flex-col  items-center">
-        <label className="  w-2/4 my-2" htmlFor="">
-          <p className="text-2xl"> Your Question ? </p>
+        <label className="  md:w-1/2 w-3/4 my-2" htmlFor="">
+          <p className="text-xl md:text-2xl"> Your Question ? </p>
           <textarea
-            className="question border-2 w-full rounded-md h-24 px-4 py-4 my-3"
+            className="question border-2 w-full rounded-md md:h-24 h-20 px-4 py-4 my-3"
             type="text"
           />
         </label>
         {options.map((value) => {
           return <Options option={value} />;
         })}
-        <div className="mb-8 w-1/2 flex justify-between">
+        <div className=" w-3/4 mb-8 md:w-1/2 flex justify-between">
           <button
             onClick={addOptions}
-            className="  btn-add border-2 rounded-md py-1 px-3 font-medium "
+            className="  btn-add border-2 rounded-md py-1 px-3 text-sm md:font-medium "
           >
             More Options{" "}
             <span className="text-sky-500 text-xl font-extrabold"> + </span>{" "}
           </button>
           <button
-            className="  btn-create text-red-500 border-2 rounded-md py-2 px-3 font-medium underline "
+            className="  btn-create text-red-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline "
             type="submit"
           >
             Create Poll

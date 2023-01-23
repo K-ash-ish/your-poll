@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import Options from "./Options";
+import { v4 as uuidv4 } from "uuid";
+function Options(props) {
+  const { option, handleInput } = props;
+  return (
+    <label className="options  md:w-1/2 w-3/4 my-2" htmlFor="">
+      <p className="md:text-xl text-base "> Option : {option}</p>
+      <input
+        className="border-2 w-full rounded-md md-h-10 h-8 px-4 py-6 my-3"
+        type="text"
+        name={"option" + option}
+        onChange={handleInput}
+      />
+    </label>
+  );
+}
 function CreatePoll() {
+  const [poll, setPoll] = useState("");
   const [options, setOptions] = useState([1, 2]);
-  // const [poll, setPoll] = useState({
-  //   question: "",
-  //   options: {},
-  // });
+
   function addOptions(event) {
     event.preventDefault();
     setOptions((prevValue) => {
@@ -13,6 +25,17 @@ function CreatePoll() {
       return [...prevValue, nextValue];
     });
   }
+  function handleInput(event) {
+    const { name, value } = event.target;
+    setPoll((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      };
+    });
+    console.log(poll);
+  }
+
   return (
     <div className="w-full min-h-screen border-2  ">
       <form action="" className="my-10 flex flex-col  items-center">
@@ -21,10 +44,19 @@ function CreatePoll() {
           <textarea
             className="question border-2 w-full rounded-md md:h-24 h-20 px-4 py-4 my-3"
             type="text"
+            name="question"
+            onChange={handleInput}
           />
         </label>
-        {options.map((value) => {
-          return <Options option={value} />;
+        {options.map((value, index) => {
+          return (
+            <Options
+              // key={uuidv4()}
+              key = {index}
+              handleInput={handleInput}
+              option={value}
+            />
+          );
         })}
         <div className=" w-3/4 mb-8 md:w-1/2 flex justify-between">
           <button

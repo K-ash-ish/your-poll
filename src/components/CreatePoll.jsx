@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { question, options } from "../features/question/qustionSlice";
+import { id, polls } from "../features/poll/pollSlice";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -8,16 +11,18 @@ function Options(props) {
       <input
         className="border-2 w-full rounded-md md-h-10 h-8 px-4 py-6 my-3"
         type="text"
-        name={"option" + option}
+        name={option}
         onChange={handleInput}
       />
     </label>
   );
 }
 function CreatePoll() {
-  const [poll, setPoll] = useState("");
-  const [options, setOptions] = useState([1, 2]);
-
+  const [newPoll, setNewPoll] = useState("");
+  const [option, setOptions] = useState([1, 2]);
+  const newQuestion = useSelector((state) => state.question);
+  const allPoll = useSelector((state) => state.poll);
+  const dispatch = useDispatch();
   function addOptions(event) {
     event.preventDefault();
     setOptions((prevValue) => {
@@ -27,13 +32,23 @@ function CreatePoll() {
   }
   function handleInput(event) {
     const { name, value } = event.target;
-    setPoll((prevValue) => {
+    setNewPoll((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
       };
     });
-    console.log(poll);
+  }
+  function handleClick(event) {
+    event.preventDefault();
+    dispatch(question(newPoll.question));
+    option.map((option) => {
+      return dispatch(options(newPoll[option]));
+    });
+    dispatch(id(uuidv4()));
+    console.log(newQuestion);
+    // cant access redux state just after dispatching 
+    // dispatch(polls(newQuestion));
   }
 
   return (
@@ -48,11 +63,13 @@ function CreatePoll() {
             onChange={handleInput}
           />
         </label>
-        {options.map((value, index) => {
+        {option.map((value, index) => {
           return (
             <Options
               // key={uuidv4()}
-              key = {index}
+              // when using unique keys generator it rerenders the component and also when using
+              // component function inside the parent component the component function should be on top
+              key={index}
               handleInput={handleInput}
               option={value}
             />
@@ -72,11 +89,14 @@ function CreatePoll() {
           <button
             className="  btn-create tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "
             type="submit"
+            onClick={handleClick}
           >
             Create Poll
           </button>
         </div>
       </form>
+      <h1>{JSON.stringify(newQuestion, null, 2)}</h1>
+      <h1>{JSON.stringify(allPoll, null, 2)}</h1>
     </div>
   );
 }

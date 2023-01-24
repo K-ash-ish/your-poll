@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { question, options } from "../features/question/qustionSlice";
-import { id, polls } from "../features/poll/pollSlice";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -20,8 +19,6 @@ function Options(props) {
 function CreatePoll() {
   const [newPoll, setNewPoll] = useState("");
   const [option, setOptions] = useState([1, 2]);
-  const newQuestion = useSelector((state) => state.question);
-  const allPoll = useSelector((state) => state.poll);
   const dispatch = useDispatch();
   function addOptions(event) {
     event.preventDefault();
@@ -45,8 +42,7 @@ function CreatePoll() {
     option.map((option) => {
       return dispatch(options(newPoll[option]));
     });
-    dispatch(id(uuidv4()));
-    console.log(newQuestion);
+    // console.log(newQuestion);
     // cant access redux state just after dispatching 
     // dispatch(polls(newQuestion));
   }
@@ -95,8 +91,6 @@ function CreatePoll() {
           </button>
         </div>
       </form>
-      <h1>{JSON.stringify(newQuestion, null, 2)}</h1>
-      <h1>{JSON.stringify(allPoll, null, 2)}</h1>
     </div>
   );
 }

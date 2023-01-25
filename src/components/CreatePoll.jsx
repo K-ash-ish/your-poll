@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { question, options } from "../features/question/qustionSlice";
+import { Link, useNavigate } from "react-router-dom";
+import YourPoll from "./YourPoll";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -19,6 +20,7 @@ function Options(props) {
 function CreatePoll() {
   const [newPoll, setNewPoll] = useState("");
   const [option, setOptions] = useState([1, 2]);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   function addOptions(event) {
     event.preventDefault();
@@ -42,8 +44,9 @@ function CreatePoll() {
     option.map((option) => {
       return dispatch(options(newPoll[option]));
     });
+    navigate("yourpoll");
     // console.log(newQuestion);
-    // cant access redux state just after dispatching 
+    // cant access redux state just after dispatching
     // dispatch(polls(newQuestion));
   }
 

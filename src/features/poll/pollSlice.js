@@ -1,17 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: "",
   polls: [],
 };
 
 export const pollSlice = createSlice({
-  name: "newPoll",
+  name: "allPoll",
   initialState,
   reducers: {
-    id: (state, action) => {
-      state.id = action.payload;
-    },
     polls: (state, action) => {
       state.polls.push(action.payload);
     },

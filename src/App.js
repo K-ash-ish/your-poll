@@ -9,7 +9,10 @@ function App() {
     <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/yourpoll" element={<YourPoll />} />
+        <Route path="/yourpoll">
+          <Route path=":pollid" element={<YourPoll />} />
+          {/* relative path beacuse else it will open the route from root */}
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

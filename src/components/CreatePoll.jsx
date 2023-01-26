@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { question, options } from "../features/question/qustionSlice";
-import { Link, useNavigate } from "react-router-dom";
-import YourPoll from "./YourPoll";
+import { id, question, options } from "../features/question/qustionSlice";
+import { generatePath, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -40,11 +40,14 @@ function CreatePoll() {
   }
   function handleClick(event) {
     event.preventDefault();
+    const uniqueId = uuidv4();
+    dispatch(id(uniqueId));
     dispatch(question(newPoll.question));
     option.map((option) => {
       return dispatch(options(newPoll[option]));
     });
-    navigate("yourpoll");
+    uniqueId && navigate(generatePath("/yourpoll/:pollid", {pollid:uniqueId}))
+    // navigate("yourpoll");
     // console.log(newQuestion);
     // cant access redux state just after dispatching
     // dispatch(polls(newQuestion));

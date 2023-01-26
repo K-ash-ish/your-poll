@@ -1,11 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { question: "", options: [] };
+const initialState = {
+  id: "",
+  question: "",
+  options: [],
+};
 
 export const pollSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
+    id: (state, action) => {
+      state.id = action.payload;
+    },
     question: (state, action) => {
       state.question = action.payload;
     },
@@ -15,5 +22,5 @@ export const pollSlice = createSlice({
   },
 });
 
-export const { question, options } = pollSlice.actions;
+export const { id, question, options } = pollSlice.actions;
 export default pollSlice.reducer;

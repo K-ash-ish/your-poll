@@ -4,6 +4,6 @@ import pollReducer from "../features/poll/pollSlice";
 export const store = configureStore({
   reducer: {
     question: questionReducer,
-    poll: pollReducer,
+    allPoll: pollReducer,
   },
 });

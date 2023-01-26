@@ -2,6 +2,7 @@ import React from "react";
 import VoteFor from "./VoteFor";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { useParams } from "react-router-dom";
 function YourPoll() {
   const newPoll = useSelector((state) => state.question);
   return (

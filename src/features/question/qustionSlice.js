@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   id: "",
   question: "",
@@ -19,8 +18,16 @@ export const pollSlice = createSlice({
     options: (state, action) => {
       state.options.push(action.payload);
     },
+    voted: (state, action) => {
+      const options = state.options;
+      options.forEach((option, index) => {
+        if (option.option === action.payload) {
+          state.options[index].vote++;
+        }
+      });
+    },
   },
 });
 
-export const { id, question, options } = pollSlice.actions;
+export const { id, question, options, voted } = pollSlice.actions;
 export default pollSlice.reducer;

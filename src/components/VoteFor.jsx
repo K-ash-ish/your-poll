@@ -1,8 +1,13 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { voted } from "../features/question/qustionSlice";
 function VoteFor(props) {
+  const dispatch = useDispatch();
+  const votes = useSelector(state=> state.question.options);
+  
   function voteCount(e){
-    console.log(e.target.parentElement.getAttribute("optionNo"))
+    const voteFor = e.target.previousSibling.innerText;
+    dispatch(voted(voteFor));
   }
   const { option, optionNo } = props;
   return (
@@ -17,6 +22,7 @@ function VoteFor(props) {
           </button>
         </div>
       </div>
+      <p>{JSON.stringify(votes)}</p>
     </div>
   );
 }

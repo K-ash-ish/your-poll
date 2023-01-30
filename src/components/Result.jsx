@@ -61,11 +61,9 @@ function Result() {
                   option={poll.option}
                 />
               );
-              {
-                /* no need tochange */
-              }
             })}
           </div>
+              {/* no need tochange */}
           {/* <div className="share-link border-2 w-4/5 flex  justify-around m-4">
         <button>Share link</button>
         <button>Share link</button>

@@ -1,12 +1,14 @@
-import React, {useState} from "react";
-import VoteFor from "./VoteFor";
+import React from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import NotFound from "./NotFound";
-//local state for opiton voted
+import VoteFor from "./VoteFor";
+
 function YourPoll() {
   const newPoll = useSelector((state) => state.question);
+  console.log(newPoll)
+  // will have to change this and get from all polls
   // const [pollResult, setPollResult] = useState();
   // const newPoll = JSON.parse(localStorage.getItem("newPoll")) || "";
   // checking if id matches any entry from the database or not
@@ -22,7 +24,11 @@ function YourPoll() {
             </p>
             {newPoll.options.map((option, index) => {
               return (
-                <VoteFor key={uuidv4()} optionNo={index + 1} option={option.option} />
+                <VoteFor
+                  key={uuidv4()}
+                  optionNo={index + 1}
+                  option={option.option}
+                />
               );
             })}
           </div>

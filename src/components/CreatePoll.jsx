@@ -50,8 +50,7 @@ function CreatePoll() {
       };
       return dispatch(options(newOption));
     });
-    uniqueId &&
-      navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
+    uniqueId &&navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
     // navigate("yourpoll");
     // console.log(newQuestion);
     // cant access redux state just after dispatching

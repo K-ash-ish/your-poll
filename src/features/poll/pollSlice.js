@@ -14,5 +14,5 @@ export const pollSlice = createSlice({
   },
 });
 
-export const { id, polls } = pollSlice.actions;
+export const { polls } = pollSlice.actions;
 export default pollSlice.reducer;

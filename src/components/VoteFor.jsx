@@ -1,12 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams, generatePath } from "react-router-dom";
 import { voted } from "../features/question/qustionSlice";
 function VoteFor(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pollid } = useParams();
-  const votes = useSelector((state) => state.question.options);
 
   const { option, optionNo } = props;
 
@@ -33,7 +32,6 @@ function VoteFor(props) {
           </button>
         </div>
       </div>
-      <p>{JSON.stringify(votes)}</p>
     </div>
   );
 }

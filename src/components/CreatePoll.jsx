@@ -53,13 +53,9 @@ function CreatePoll() {
       id: uniqueId,
       question: newPoll.question,
       option: pollOption,
-    })
-      .then(() => {
-        console.log("Send data");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
     uniqueId &&
       navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
     // navigate("yourpoll");

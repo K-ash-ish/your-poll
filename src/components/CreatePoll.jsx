@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { generatePath, useNavigate } from "react-router-dom";
-import { id, question, options } from "../features/question/qustionSlice";
+import { pollCollectionRef } from "../firebase-config";
+import { addDoc } from "firebase/firestore";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -21,7 +21,6 @@ function CreatePoll() {
   const [newPoll, setNewPoll] = useState("");
   const [option, setOptions] = useState([1, 2]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   function addOptions(event) {
     event.preventDefault();
     setOptions((prevValue) => {
@@ -41,29 +40,26 @@ function CreatePoll() {
   function handleClick(event) {
     event.preventDefault();
     const uniqueId = uuidv4();
-    dispatch(id(uniqueId));
-    dispatch(question(newPoll.question));
     const pollOption = [];
     option.map((option) => {
       const newOption = {
         option: newPoll[option],
         vote: 0,
       };
-      pollOption.push(newOption);
-      return dispatch(options(newOption));
+      return pollOption.push(newOption);
     });
     //adding to database
-    // addDoc(pollCollectionRef, {
-    //   id: uniqueId,
-    //   question: newPoll.question,
-    //   option: pollOption,
-    // })
-    //   .then(() => {
-    //     console.log("Send data");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    addDoc(pollCollectionRef, {
+      id: uniqueId,
+      question: newPoll.question,
+      option: pollOption,
+    })
+      .then(() => {
+        console.log("Send data");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     uniqueId &&
       navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
     // navigate("yourpoll");

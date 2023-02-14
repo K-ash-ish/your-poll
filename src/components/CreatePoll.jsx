@@ -43,14 +43,29 @@ function CreatePoll() {
     const uniqueId = uuidv4();
     dispatch(id(uniqueId));
     dispatch(question(newPoll.question));
+    const pollOption = [];
     option.map((option) => {
       const newOption = {
         option: newPoll[option],
         vote: 0,
       };
+      pollOption.push(newOption);
       return dispatch(options(newOption));
     });
-    uniqueId &&navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
+    //adding to database
+    // addDoc(pollCollectionRef, {
+    //   id: uniqueId,
+    //   question: newPoll.question,
+    //   option: pollOption,
+    // })
+    //   .then(() => {
+    //     console.log("Send data");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    uniqueId &&
+      navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
     // navigate("yourpoll");
     // console.log(newQuestion);
     // cant access redux state just after dispatching
@@ -58,7 +73,7 @@ function CreatePoll() {
   }
 
   return (
-    <div className="w-full min-h-screen border-2  ">
+    <div className="w-full border-2  ">
       <form action="" className="my-10 flex flex-col  items-center">
         <label className="  md:w-1/2 w-3/4 my-2" htmlFor="">
           <p className="text-xl md:text-2xl"> Your Question ? </p>

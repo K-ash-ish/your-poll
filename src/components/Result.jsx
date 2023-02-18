@@ -23,7 +23,9 @@ function Result() {
   const [poll, setPoll] = useState();
   const { pollid } = useParams();
   useEffect(() => {
-    getDocumentByQuery(pollid);
+    setTimeout(() => {
+      getDocumentByQuery(pollid);
+    }, 2000);
   }, [pollid]);
   const getDocumentByQuery = async (id) => {
     const q = query(pollCollectionRef, where("id", "==", id));

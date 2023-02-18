@@ -1,17 +1,28 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useParams, generatePath } from "react-router-dom";
-import { voted } from "../features/question/qustionSlice";
+// import { useDispatch } from "react-redux";
+import { useNavigate, generatePath, useParams } from "react-router-dom";
+import { database } from "../firebase-config";
+import { doc, increment, updateDoc } from "firebase/firestore";
 function VoteFor(props) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const { pollid } = useParams();
-
-  const { option, optionNo } = props;
-
+  const { option, optionNo, docId } = props;
+  const navigate = useNavigate();
   function voteCount(e) {
     const voteFor = e.target.previousSibling.innerText;
-    dispatch(voted(voteFor));
+    const pollRef = doc(database, "allPolls", docId);
+
+    updateDoc(
+      pollRef,
+      {
+        [`votes.${voteFor}`]: increment(1),
+      },
+      { merge: true }
+    ).then(() => {
+      
+    });
+    // dispatch(voted(voteFor));
     navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
   }
   return (

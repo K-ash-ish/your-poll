@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
-import NotFound from "./NotFound";
+import { pollCollectionRef } from "../firebase-config";
+import { getDocs, query, where } from "firebase/firestore";
 function OptionResult(props) {
   const { option, vote } = props;
   return (
@@ -11,7 +11,7 @@ function OptionResult(props) {
       <div className="md:text-xl border-b-2 option font-medium">{option}</div>
       <div className="votes font-bold m-2">
         <span className="text-sky-500">Votes: </span>
-        {vote}
+        {vote[option] || 0}
       </div>
       <div className="vote-bar m-2 border-y-2 h-4 rounded-md flex justify-start items-center">
         <div className="w-1/2 option-vote h-4  rounded-md bg-rose-500"></div>
@@ -20,7 +20,18 @@ function OptionResult(props) {
   );
 }
 function Result() {
-  const currentPoll = useSelector((state) => state.question);
+  const [poll, setPoll] = useState();
+  const { pollid } = useParams();
+  useEffect(() => {
+    getDocumentByQuery(pollid);
+  }, [pollid]);
+  const getDocumentByQuery = async (id) => {
+    const q = query(pollCollectionRef, where("id", "==", id));
+    const snapshot = await getDocs(q);
+    snapshot.forEach((data) => {
+      setPoll(data.data());
+    });
+  };
   // const currentPoll = {
   //   id: "acb4d890-d5be-4cc3-aa5d-f9aa8f76a74f",
   //   question: "asqw",
@@ -44,23 +55,22 @@ function Result() {
   //   ],
   // };
 
-  const { pollid } = useParams();
   // will have to change this search from all polls
   return (
     <>
       <Header />
-      {currentPoll.id === pollid ? (
+      {poll?.id === pollid ? (
         <div className="result-container my-6 w-full   flex flex-col justify-center  items-center">
           <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
             Result
           </h2>
           <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
-            {currentPoll.options.map((poll) => {
+            {poll.option.map((polls) => {
               return (
                 <OptionResult
                   key={uuidv4()}
-                  vote={poll.vote}
-                  option={poll.option}
+                  vote={poll.votes}
+                  option={polls.option}
                 />
               );
             })}
@@ -73,7 +83,10 @@ function Result() {
       </div> */}
         </div>
       ) : (
-        <NotFound />
+        <React.Fragment>
+          <h1 className="my-6 text-2xl">Loading...</h1>
+          <p>(Check your link. If taking too much time)</p>
+        </React.Fragment>
       )}
     </>
   );

@@ -41,11 +41,16 @@ function CreatePoll() {
     event.preventDefault();
     const uniqueId = uuidv4();
     const pollOption = [];
+    const votes = [];
     option.map((option) => {
+      const voteKey = newPoll[option];
+      const vote = {
+        [voteKey]: 0,
+      };
       const newOption = {
         option: newPoll[option],
-        vote: 0,
       };
+      votes.push(vote);
       return pollOption.push(newOption);
     });
     //adding to database
@@ -53,6 +58,7 @@ function CreatePoll() {
       id: uniqueId,
       question: newPoll.question,
       option: pollOption,
+      votes: votes,
     }).catch((err) => {
       console.log(err);
     });

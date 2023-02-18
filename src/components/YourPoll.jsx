@@ -9,6 +9,7 @@ import { getDocs, query, where } from "firebase/firestore";
 function YourPoll() {
   const [poll, setPoll] = useState();
   const { pollid } = useParams();
+  const [docId, setDocId] = useState();
   useEffect(() => {
     getDocumentByQuery(pollid);
   }, [pollid]);
@@ -16,16 +17,18 @@ function YourPoll() {
     const q = query(pollCollectionRef, where("id", "==", id));
     const snapshot = await getDocs(q);
     snapshot.forEach((data) => {
+      setDocId(data.id);
       setPoll(data.data());
     });
   };
-
   // will have to change this and get from all polls
   // const [pollResult, setPollResult] = useState();
   // const newPoll = JSON.parse(localStorage.getItem("newPoll")) || "";
   // checking if id matches any entry from the database or not
 
   // localStorage.setItem("newPoll", JSON.stringify(newPoll));
+  //early return
+
   return !poll?.id ? (
     <React.Fragment>
       <h1 className="my-6 text-2xl">Loading...</h1>
@@ -45,6 +48,7 @@ function YourPoll() {
                 key={uuidv4()}
                 optionNo={index + 1}
                 option={option.option}
+                docId={docId}
               />
             );
           })}

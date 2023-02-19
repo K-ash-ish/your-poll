@@ -1,7 +1,7 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
-import { Route, Routes } from "react-router-dom";
 import YourPoll from "./components/YourPoll";
 import NotFound from "./components/NotFound";
 import Result from "./components/Result";

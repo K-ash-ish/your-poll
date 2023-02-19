@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { useDispatch } from "react-redux";
+import { ClientJS } from "clientjs";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import { database } from "../firebase-config";
 import { doc, increment, updateDoc } from "firebase/firestore";
+
+const client = new ClientJS();
+const fingerPrint = client.getFingerprint();
+
 function VoteFor(props) {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -19,12 +24,18 @@ function VoteFor(props) {
         [`votes.${voteFor}`]: increment(1),
       },
       { merge: true }
-    ).then(() => {
-      
-    });
+    ).then(() => {});
+    localStorage.setItem("fingerPrint", fingerPrint);
     // dispatch(voted(voteFor));
     navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
   }
+  const fingerPrintCheck = localStorage.getItem("fingerPrint");
+  useEffect(() => {
+    if (fingerPrintCheck === fingerPrint.toString()) {
+      // return redirect("/");
+      return navigate("/yourpoll/" + pollid + "/results");
+    }
+  });
   return (
     <div className="options my-4 border-b-2 border-slate-100">
       <div className="option md:text-xl  flex items-center  pb-4">

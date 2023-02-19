@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
 import { pollCollectionRef } from "../firebase-config";
 import { getDocs, query, where } from "firebase/firestore";
+import { ResultShimmer } from "./Shimmer";
 function OptionResult(props) {
   const { option, vote } = props;
   return (
@@ -60,7 +61,6 @@ function Result() {
   // will have to change this search from all polls
   return (
     <>
-      <Header />
       {poll?.id === pollid ? (
         <div className="result-container my-6 w-full   flex flex-col justify-center  items-center">
           <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
@@ -85,10 +85,7 @@ function Result() {
       </div> */}
         </div>
       ) : (
-        <React.Fragment>
-          <h1 className="my-6 text-2xl">Loading...</h1>
-          <p>(Check your link. If taking too much time)</p>
-        </React.Fragment>
+        <ResultShimmer />
       )}
     </>
   );

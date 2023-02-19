@@ -1,38 +1,35 @@
 import React, { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-import { ClientJS } from "clientjs";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import { database } from "../firebase-config";
 import { doc, increment, updateDoc } from "firebase/firestore";
-
-const client = new ClientJS();
-const fingerPrint = client.getFingerprint();
 
 function VoteFor(props) {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
   const { pollid } = useParams();
   const { option, optionNo, docId } = props;
+  const fingerPrintCheck =
+    JSON.parse(localStorage.getItem("fingerPrint")) || [];
   const navigate = useNavigate();
   function voteCount(e) {
     const voteFor = e.target.previousSibling.innerText;
     const pollRef = doc(database, "allPolls", docId);
+    const localArray = JSON.parse(localStorage.getItem("fingerPrint")) || [];
 
+    localArray.push(pollid);
+    localStorage.setItem("fingerPrint", JSON.stringify(localArray));
     updateDoc(
       pollRef,
       {
         [`votes.${voteFor}`]: increment(1),
       },
       { merge: true }
-    ).then(() => {});
-    localStorage.setItem("fingerPrint", fingerPrint);
-    // dispatch(voted(voteFor));
-    navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
+    ).then(() => {
+      navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
+    });
   }
-  const fingerPrintCheck = localStorage.getItem("fingerPrint");
   useEffect(() => {
-    if (fingerPrintCheck === fingerPrint.toString()) {
-      // return redirect("/");
+    if (fingerPrintCheck.includes(pollid)) {
       return navigate("/yourpoll/" + pollid + "/results");
     }
   });

@@ -11,7 +11,6 @@ function OptionResult(props) {
       <div className="md:text-xl border-b-2 option font-medium">{option}</div>
       <div className="votes font-bold m-2">
         <span className="text-sky-500">Votes: </span>
-        {console.log(vote[option] || 0) }
         {vote[option] || 0}
       </div>
       <div className="vote-bar m-2 border-y-2 h-4 rounded-md flex justify-start items-center">

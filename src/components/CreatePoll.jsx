@@ -112,7 +112,7 @@ function CreatePoll() {
             </span>{" "}
           </button>
           <input
-            className="  btn-create tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "
+            className="  btn-create cursor-pointer tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "
             type="submit"
             value="CreatePoll"
           />

@@ -72,7 +72,7 @@ function CreatePoll() {
   }
 
   return (
-    <div className="w-full border-2  ">
+    <div className="w-full   ">
       <form
         action=""
         onSubmit={handleClick}

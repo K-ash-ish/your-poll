@@ -7,7 +7,7 @@ import {
 
 function Footer() {
   return (
-    <footer className="relative  my-4 w-full  bottom-0 flex  justify-around items-center">
+    <footer className="border-t-2 relative  py-4 w-full  bottom-0 flex  justify-around items-center">
       <div className=" social-links text-4xl my-1  text-sky-500">
         <a
           className=" px-6"

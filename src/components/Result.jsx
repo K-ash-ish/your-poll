@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import Header from "./Header";
+import QRCode from "react-qr-code";
 import { pollCollectionRef } from "../firebase-config";
 import { getDocs, query, where } from "firebase/firestore";
 import { ResultShimmer } from "./Shimmer";
@@ -9,14 +9,14 @@ function OptionResult(props) {
   const { option, vote } = props;
   return (
     <div className="option-result m-4 p-2 border-2 ">
-      <div className="md:text-xl border-b-2 option font-medium">{option}</div>
-      <div className="votes font-bold m-2">
+      <div className="capitalize md:text-xl border-b-2 option font-medium">{option}</div>
+      <div className="votes font-bold m-2 text-xl" >
         <span className="text-sky-500">Votes: </span>
         {vote[option] || 0}
       </div>
-      <div className="vote-bar m-2 border-y-2 h-4 rounded-md flex justify-start items-center">
+      {/* <div className="vote-bar m-2 border-y-2 h-4 rounded-md flex justify-start items-center">
         <div className="w-1/2 option-vote h-4  rounded-md bg-rose-500"></div>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -59,35 +59,40 @@ function Result() {
   // };
 
   // will have to change this search from all polls
-  return (
-    <>
-      {poll?.id === pollid ? (
-        <div className="result-container my-6 w-full   flex flex-col justify-center  items-center">
-          <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
-            Result
-          </h2>
-          <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
-            {poll.option.map((polls) => {
-              return (
-                <OptionResult
-                  key={uuidv4()}
-                  vote={poll.votes}
-                  option={polls.option}
-                />
-              );
-            })}
-          </div>
-          {/* no need tochange */}
-          {/* <div className="share-link border-2 w-4/5 flex  justify-around m-4">
+  return poll?.id === pollid ? (
+    <div className="result-container my-6 w-full   flex flex-row justify-around  items-center">
+      <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
+        <h2 className="mx-4 my-2  capitalize text-2xl md:text-3xl font-bold tracking-wider  underline-offset-4">
+          {poll.question} ?
+        </h2>
+        {poll.option.map((polls) => {
+          return (
+            <OptionResult
+              key={uuidv4()}
+              vote={poll.votes}
+              option={polls.option}
+            />
+          );
+        })}
+      </div>
+      <div className="sharing-links flex flex-col items-center h-18  justify-center my-4  ">
+        <QRCode
+          size={256}
+          style={{ height: "auto", width: "50%" }}
+          value={`https://your-poll.netlify.app/yourpoll/${pollid}`}
+          viewBox={`0 0 256 256`}
+        />
+      </div>
+
+      {/* no need tochange */}
+      {/* <div className="share-link border-2 w-4/5 flex  justify-around m-4">
         <button>Share link</button>
         <button>Share link</button>
         <button>Share link</button>
       </div> */}
-        </div>
-      ) : (
-        <ResultShimmer />
-      )}
-    </>
+    </div>
+  ) : (
+    <ResultShimmer />
   );
 }
 

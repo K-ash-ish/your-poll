@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../404page.png";
+// use route error only works with createRouteBrowser
 function NotFound() {
   const navigate = useNavigate();
   return (

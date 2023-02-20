@@ -1,16 +1,28 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import YourPoll from "./components/YourPoll";
 import NotFound from "./components/NotFound";
 import Result from "./components/Result";
 import AllPolls from "./components/AllPolls";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 function App() {
   return (
-    <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
-      <Routes>
+    <Routes>
+      <Route
+        element={
+          <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
+            <Header />
+            <Outlet />
+            <Footer />
+          </div>
+        }
+      >
         <Route path="/" element={<Home />} />
+
         <Route path="/yourpoll">
           <Route path=":pollid" element={<YourPoll />} />
           <Route path=":pollid/results" element={<Result />} />
@@ -18,8 +30,8 @@ function App() {
         </Route>
         <Route path="/allpolls" element={<AllPolls />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 }
 

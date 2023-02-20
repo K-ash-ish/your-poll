@@ -5,7 +5,6 @@ import Home from "./components/Home";
 import YourPoll from "./components/YourPoll";
 import NotFound from "./components/NotFound";
 import Result from "./components/Result";
-import AllPolls from "./components/AllPolls";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -28,7 +27,6 @@ function App() {
           <Route path=":pollid/results" element={<Result />} />
           {/* relative path beacuse else it will open the route from root */}
         </Route>
-        <Route path="/allpolls" element={<AllPolls />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

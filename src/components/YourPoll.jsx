@@ -40,7 +40,7 @@ function YourPoll() {
             to={`/yourpoll/${poll.id}/results`}
             className="my-2 text-lg font-bold underline"
           >
-            <p>Results</p>
+            Results
           </Link>
         </p>
         {poll.option.map((option, index) => {

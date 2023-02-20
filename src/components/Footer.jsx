@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div className="fixed mb-4 w-full  bottom-0 flex  justify-center items-center social-links text-4xl my-1  text-sky-500">
+    <div className="relative  my-4 w-full  bottom-0 flex  justify-center items-center social-links text-4xl my-1  text-sky-500">
       <Link className=" px-6" href="https://github.com/K-ash-ish">
         <FontAwesomeIcon icon={faGithub} />
       </Link>

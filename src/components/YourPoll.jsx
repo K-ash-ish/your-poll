@@ -54,7 +54,7 @@ function YourPoll() {
           );
         })}
       </div>
-      <div className="sharing-links flex flex-col border-2 items-center p-2 h-18  justify-center my-4  ">
+      <div className="sharing-links flex flex-col  items-center p-2 h-18  justify-center my-4  ">
         <QRCode
           size={256}
           style={{ height: "auto", width: "50%" }}

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { pollCollectionRef } from "../firebase-config";
+import { v4 as uuidv4 } from "uuid";
 import { getDocs } from "firebase/firestore";
-import Header from "./Header";
+import { pollCollectionRef } from "../firebase-config";
 function AllPolls() {
   const [allPoll, setAllPoll] = useState();
   useEffect(() => {
@@ -19,14 +18,15 @@ function AllPolls() {
       return polls;
     });
   }
-  console.log(allPoll);
   return allPoll?.length > 0 ? (
     <>
-      <Header />
-      <div className="all-poll-container w-full flex-row my-6 ">
-        {allPoll.map((poll) => {
+      <div className="all-poll-container w-full flex-row my-6 border-2 w-1/2 ">
+        {allPoll.map((poll, index) => {
           return (
-            <li className="text-2xl my-6 mx-4 border-b-2 text-blue-400">
+            <li
+              key={uuidv4()}
+              className="text-2xl my-6 mx-4 capitalize underline decoration-blue-400 "
+            >
               <Link to={`/yourpoll/${poll.id}`}>{poll.question}</Link>
             </li>
           );

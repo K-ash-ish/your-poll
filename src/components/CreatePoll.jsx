@@ -13,6 +13,7 @@ function Options(props) {
         type="text"
         name={option}
         onChange={handleInput}
+        required
       />
     </label>
   );
@@ -72,7 +73,11 @@ function CreatePoll() {
 
   return (
     <div className="w-full border-2  ">
-      <form action="" className="my-10 flex flex-col  items-center">
+      <form
+        action=""
+        onSubmit={handleClick}
+        className="my-10 flex flex-col  items-center"
+      >
         <label className="  md:w-1/2 w-3/4 my-2" htmlFor="">
           <p className="text-xl md:text-2xl"> Your Question ? </p>
           <textarea
@@ -80,6 +85,7 @@ function CreatePoll() {
             type="text"
             name="question"
             onChange={handleInput}
+            required
           />
         </label>
         {option.map((value, index) => {
@@ -105,13 +111,11 @@ function CreatePoll() {
               +{" "}
             </span>{" "}
           </button>
-          <button
+          <input
             className="  btn-create tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "
             type="submit"
-            onClick={handleClick}
-          >
-            Create Poll
-          </button>
+            value="CreatePoll"
+          />
         </div>
       </form>
     </div>

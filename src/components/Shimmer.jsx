@@ -18,19 +18,18 @@ function YourPollShimmer() {
 }
 function ResultShimmer() {
   return (
-    <div className="result-container my-6 w-full   flex flex-col justify-center  items-center">
-      <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8 underline decoration-rose-500 underline-offset-4">
-        Result
-      </h2>
+    <div className="result-container my-6 w-full   flex flex-row justify-around  items-center">
       <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
-        <div className="h-24 option-result m-4 p-2 border-2 ">
-          <div className="h-6 md:text-xl border-b-2 option font-medium">
-          </div>
-          <div className=" h-2 votes font-bold m-2">
-            <span className=" h-4 text-sky-500"> </span>
-          </div>
+        <p className="mx-4 my-2  capitalize text-2xl md:text-3xl font-bold tracking-wider  underline-offset-4"></p>
+        <div className="h-40 option-result m-4 p-2 border-2 ">
+          <div className="h-6 md:text-xl border-b-2 option font-medium"></div>
+         
         </div>
       </div>
+      <div className="sharing-links flex flex-col items-center h-18  justify-center my-4  ">
+        <div className="w-40 h-40 border-2"></div>
+      </div>
+
       {/* no need tochange */}
       {/* <div className="share-link border-2 w-4/5 flex  justify-around m-4">
         <button>Share link</button>

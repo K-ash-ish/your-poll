@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route
         element={
-          <div className="container box-border flex flex-col flex-wrap items-center mb-4 ">
+          <div className="container border-2  md:min-h-screen justify-between box-border flex flex-col flex-wrap items-center mb-4 ">
             <Header />
             <Outlet />
             <Footer />

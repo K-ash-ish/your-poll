@@ -60,7 +60,7 @@ function Result() {
 
   // will have to change this search from all polls
   return poll?.id === pollid ? (
-    <div className="result-container my-6 w-full   flex flex-row justify-around  items-center">
+    <div className="result-container my-6 w-full   flex md:flex-row flex-col justify-around  items-center">
       <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
         <h2 className="mx-4 my-2  capitalize text-2xl md:text-3xl font-bold tracking-wider  underline-offset-4">
           {poll.question} ?

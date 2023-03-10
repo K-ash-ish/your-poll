@@ -5,12 +5,16 @@ import QRCode from "react-qr-code";
 import { pollCollectionRef } from "../firebase-config";
 import { getDocs, query, where } from "firebase/firestore";
 import { ResultShimmer } from "./Shimmer";
+import { Banner } from "../utils/Banner";
+import useOnline from "../utils/useOnline";
 function OptionResult(props) {
   const { option, vote } = props;
   return (
     <div className="option-result m-4 p-2 border-2 ">
-      <div className="capitalize md:text-xl border-b-2 option font-medium">{option}</div>
-      <div className="votes font-bold m-2 text-xl" >
+      <div className="capitalize md:text-xl border-b-2 option font-medium">
+        {option}
+      </div>
+      <div className="votes font-bold m-2 text-xl">
         <span className="text-sky-500">Votes: </span>
         {vote[option] || 0}
       </div>
@@ -35,6 +39,13 @@ function Result() {
       setPoll(data.data());
     });
   };
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>Check your internet Connection</h1>;
+  }
+  const fingerPrintCheck =
+    JSON.parse(localStorage.getItem("fingerPrint")) || [];
+
   // const currentPoll = {
   //   id: "acb4d890-d5be-4cc3-aa5d-f9aa8f76a74f",
   //   question: "asqw",
@@ -62,6 +73,7 @@ function Result() {
   return poll?.id === pollid ? (
     <div className="result-container my-6 w-full   flex md:flex-row flex-col justify-around  items-center">
       <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
+        {fingerPrintCheck.includes(pollid) ? <Banner /> : null}
         <h2 className="mx-4 my-2  capitalize text-2xl md:text-3xl font-bold tracking-wider  underline-offset-4">
           {poll.question} ?
         </h2>

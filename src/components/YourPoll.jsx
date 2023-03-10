@@ -6,6 +6,7 @@ import VoteFor from "./VoteFor";
 import { pollCollectionRef } from "../firebase-config";
 import { getDocs, query, where } from "firebase/firestore";
 import { YourPollShimmer } from "./Shimmer";
+import useOnline from "../utils/useOnline";
 function YourPoll() {
   const [poll, setPoll] = useState();
   const { pollid } = useParams();
@@ -28,7 +29,10 @@ function YourPoll() {
 
   // localStorage.setItem("newPoll", JSON.stringify(newPoll));
   //early return
-
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>Check your internet Connection</h1>;
+  }
   return !poll?.id ? (
     <YourPollShimmer />
   ) : (

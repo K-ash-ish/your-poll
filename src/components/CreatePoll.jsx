@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { generatePath, useNavigate } from "react-router-dom";
 import { pollCollectionRef } from "../firebase-config";
 import { addDoc } from "firebase/firestore";
+import useOnline from "../utils/useOnline";
 function Options(props) {
   const { option, handleInput } = props;
   return (
@@ -69,6 +70,10 @@ function CreatePoll() {
     // console.log(newQuestion);
     // cant access redux state just after dispatching
     // dispatch(polls(newQuestion));
+  }
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>Check your internet Connection</h1>;
   }
 
   return (

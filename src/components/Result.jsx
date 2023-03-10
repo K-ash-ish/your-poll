@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import QRCode from "react-qr-code";
 import { pollCollectionRef } from "../firebase-config";
@@ -75,7 +75,13 @@ function Result() {
       <div className="results w-4/5 md:w-1/2 min-h-max border-2 border-cyan-100 rounded flex flex-col">
         {fingerPrintCheck.includes(pollid) ? <Banner /> : null}
         <h2 className="mx-4 my-2  capitalize text-2xl md:text-3xl font-bold tracking-wider  underline-offset-4">
-          {poll.question} ?
+          {!fingerPrintCheck.includes(pollid) ? (
+            <Link to={`/yourpoll/${poll.id}`} className=" underline">
+              {poll.question} ?
+            </Link>
+          ) : (
+            poll.question + "?"
+          )}
         </h2>
         {poll.option.map((polls) => {
           return (

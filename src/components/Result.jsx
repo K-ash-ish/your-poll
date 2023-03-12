@@ -9,6 +9,7 @@ import { Banner } from "../utils/Banner";
 import useOnline from "../utils/useOnline";
 function OptionResult(props) {
   const { option, vote } = props;
+  console.log(option, vote[option]);
   return (
     <div className="option-result m-4 p-2 border-2 ">
       <div className="capitalize md:text-xl border-b-2 option font-medium">
@@ -32,7 +33,7 @@ function Result() {
       getDocumentByQuery(pollid);
     }, 2000);
     return () => {
-      getDocumentByQuery();
+      getDocumentByQuery(pollid);
     };
   }, [pollid]);
   const getDocumentByQuery = async (id) => {

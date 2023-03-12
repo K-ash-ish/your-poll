@@ -12,7 +12,7 @@ function VoteFor(props) {
     JSON.parse(localStorage.getItem("fingerPrint")) || [];
   const navigate = useNavigate();
   function voteCount(e) {
-    const voteFor = e.target.previousSibling.innerText;
+    const voteFor = e.target.previousSibling.innerText.toLowerCase();
     const pollRef = doc(database, "allPolls", docId);
     const localArray = JSON.parse(localStorage.getItem("fingerPrint")) || [];
 

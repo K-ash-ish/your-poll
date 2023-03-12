@@ -1,4 +1,4 @@
-![](gif\createpoll.gif)
+![](gif/createpoll.gif)
 
 ![](gif\navigate.gif)
 

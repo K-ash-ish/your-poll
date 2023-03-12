@@ -1,9 +1,12 @@
 ## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) with RealTime vote results.
 
+![](gif/pika-1678625402882-1x.png)
+
 - Users can create an anonymous poll with as many options as they like.
 - Users can view results before voting. And navigate back to vote.
 - One user can vote only once.
-
+- Mobile Responsive design.
+  ![](gif/Picsart_23-03-12_18-22-36-877.jpg)
   Screenshot of [project](Tutorial.md)
 
 ## Things I learned while building this project.

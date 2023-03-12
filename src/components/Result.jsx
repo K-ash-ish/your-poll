@@ -31,9 +31,6 @@ function Result() {
     setTimeout(() => {
       getDocumentByQuery(pollid);
     }, 2000);
-    return () => {
-      getDocumentByQuery();
-    };
   }, [pollid]);
   const getDocumentByQuery = async (id) => {
     const q = query(pollCollectionRef, where("id", "==", id));

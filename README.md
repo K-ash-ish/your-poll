@@ -1,4 +1,4 @@
-## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) with RealTime vote results.
+## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) get RealTime vote results.
 
 ![](gif/pika-1678625402882-1x.png)
 

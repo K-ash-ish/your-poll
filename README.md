@@ -1,4 +1,4 @@
-## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) with RealTime vote results.
+## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) get RealTime vote results.
 
 - Users can create an anonymous poll with as many options as they like.
 - Users can view results before voting. And navigate back to vote.

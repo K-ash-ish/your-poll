@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import QRCode from "react-qr-code";
 import { pollCollectionRef } from "../firebase-config";
-import { getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { onSnapshot, query, where } from "firebase/firestore";
 import { ResultShimmer } from "./Shimmer";
 import { Banner } from "../utils/Banner";
 import useOnline from "../utils/useOnline";
@@ -28,7 +28,9 @@ function Result() {
   const [poll, setPoll] = useState();
   const { pollid } = useParams();
   useEffect(() => {
-    getDocumentByQuery(pollid);
+    setTimeout(() => {
+      getDocumentByQuery(pollid);
+    }, 2000);
     return () => {
       getDocumentByQuery();
     };

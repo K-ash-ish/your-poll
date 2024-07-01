@@ -8,7 +8,7 @@ function Options(props) {
   const { option, handleInput } = props;
   return (
     <label className="options  md:w-1/2 w-3/4 my-2" htmlFor="">
-      <p className="md:text-xl text-base "> Option : {option}</p>
+      <p className="md:text-xl text-base ">{option}</p>
       <input
         className="border-2 w-full rounded-md md-h-10 h-8 px-4 py-6 my-3"
         type="text"
@@ -20,52 +20,56 @@ function Options(props) {
   );
 }
 function CreatePoll() {
-  const [newPoll, setNewPoll] = useState("");
-  const [option, setOptions] = useState([1, 2]);
+  const [pollDetails, setPollDetails] = useState([]);
+  const [optionField, setOptionField] = useState(["Option 1", "Option 2"]);
   const navigate = useNavigate();
-  function addOptions(event) {
+
+  function addNewOptionField(event) {
     event.preventDefault();
-    setOptions((prevValue) => {
-      let nextValue = prevValue.length + 1;
-      return [...prevValue, nextValue];
+    setOptionField((prevValue) => {
+      let newOption = prevValue.length + 1;
+      newOption = "Option " + newOption;
+      return [...prevValue, newOption];
     });
   }
   function handleInput(event) {
     const { name, value } = event.target;
-    setNewPoll((prevValue) => {
+    setPollDetails((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
       };
     });
   }
-  function handleClick(event) {
+  function handleCreatePoll(event) {
     event.preventDefault();
     const uniqueId = uuidv4();
     const pollOption = [];
-    const votes = [];
-    option.map((option) => {
-      const voteKey = newPoll[option];
-      const vote = {
-        [voteKey]: 0,
-      };
-      const newOption = {
-        option: newPoll[option],
-      };
-      votes.push(vote);
-      return pollOption.push(newOption);
+    const votes = {};
+
+    optionField.map((option) => {
+      const optionToVote = pollDetails[option];
+
+      votes[optionToVote] = 0;
+
+      return pollOption.push(pollDetails[option]);
     });
+
     //adding to database
+
     addDoc(pollCollectionRef, {
       id: uniqueId,
-      question: newPoll.question,
+      question: pollDetails.question,
       option: pollOption,
       votes: votes,
-    }).catch((err) => {
-      console.log(err);
-    });
-    uniqueId &&
-      navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }));
+    })
+      .then(() =>
+        navigate(generatePath("/yourpoll/:pollid", { pollid: uniqueId }))
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+
     // navigate("yourpoll");
     // console.log(newQuestion);
     // cant access redux state just after dispatching
@@ -80,7 +84,7 @@ function CreatePoll() {
     <div className="w-full   ">
       <form
         action=""
-        onSubmit={handleClick}
+        onSubmit={handleCreatePoll}
         className="my-10 flex flex-col  items-center"
       >
         <label className="  md:w-1/2 w-3/4 my-2" htmlFor="">
@@ -93,7 +97,7 @@ function CreatePoll() {
             required
           />
         </label>
-        {option.map((value, index) => {
+        {optionField.map((value, index) => {
           return (
             <Options
               // key={uuidv4()}
@@ -107,14 +111,11 @@ function CreatePoll() {
         })}
         <div className=" w-3/4 mb-8 md:w-1/2 flex justify-between">
           <button
-            onClick={addOptions}
+            onClick={addNewOptionField}
             className=" tracking-wide btn-add border-2 rounded-md py-1 px-3 text-sm md:font-medium flex justify-center items-center cursor-cell hover:border-black duration-300 ease-in"
           >
-            More Options{" "}
-            <span className="ml-1 text-sky-500 text-xl font-extrabold ">
-              {" "}
-              +{" "}
-            </span>{" "}
+            More Options
+            <span className="ml-1 text-sky-500 text-xl font-extrabold ">+</span>
           </button>
           <input
             className="  btn-create cursor-pointer tracking-wide text-rose-500 border-2 rounded-md py-2 px-3 text-sm md:font-medium underline hover:border-rose-500 hover:text-black duration-300 ease-in "

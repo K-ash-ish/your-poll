@@ -11,10 +11,10 @@ function OptionResult(props) {
   const { option, vote } = props;
   return (
     <div className="option-result m-4 p-2 border-2 ">
-      <div className="capitalize md:text-xl border-b-2 option font-medium">
+      <div className="capitalize md:text-xl border-b-2 option font-semibold">
         {option}
       </div>
-      <div className="votes font-bold m-2 text-xl">
+      <div className="votes font-medium m-2 text-lg">
         <span className="text-sky-500">Votes: </span>
         {vote[option] || 0}
       </div>
@@ -28,18 +28,16 @@ function Result() {
   const [poll, setPoll] = useState();
   const { pollid } = useParams();
   useEffect(() => {
-    setTimeout(() => {
-      getDocumentByQuery(pollid);
-    }, 2000);
-  }, [pollid]);
-  const getDocumentByQuery = async (id) => {
-    const q = query(pollCollectionRef, where("id", "==", id));
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((data) => {
-        setPoll(data.data());
+    (async () => {
+      const q = query(pollCollectionRef, where("id", "==", pollid));
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((data) => {
+          console.log(data.data());
+          setPoll(data.data());
+        });
       });
-    });
-  };
+    })();
+  }, [pollid]);
   const isOnline = useOnline();
   if (!isOnline) {
     return <h1>Check your internet Connection</h1>;
@@ -84,13 +82,9 @@ function Result() {
             poll.question + "?"
           )}
         </h2>
-        {poll.option.map((polls) => {
+        {poll.option.map((option) => {
           return (
-            <OptionResult
-              key={uuidv4()}
-              vote={poll.votes}
-              option={polls.option}
-            />
+            <OptionResult key={uuidv4()} vote={poll.votes} option={option} />
           );
         })}
       </div>

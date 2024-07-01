@@ -12,16 +12,16 @@ function YourPoll() {
   const { pollid } = useParams();
   const [docId, setDocId] = useState();
   useEffect(() => {
-    getDocumentByQuery(pollid);
+    (async () => {
+      const q = query(pollCollectionRef, where("id", "==", pollid));
+      const snapshot = await getDocs(q);
+      snapshot.forEach((data) => {
+        setDocId(data.id);
+        setPoll(data.data());
+      });
+    })();
   }, [pollid]);
-  const getDocumentByQuery = async (id) => {
-    const q = query(pollCollectionRef, where("id", "==", id));
-    const snapshot = await getDocs(q);
-    snapshot.forEach((data) => {
-      setDocId(data.id);
-      setPoll(data.data());
-    });
-  };
+  console.log(poll);
   // will have to change this and get from all polls
   // const [pollResult, setPollResult] = useState();
   // const newPoll = JSON.parse(localStorage.getItem("newPoll")) || "";
@@ -52,7 +52,7 @@ function YourPoll() {
             <VoteFor
               key={uuidv4()}
               optionNo={index + 1}
-              option={option.option}
+              option={option}
               docId={docId}
             />
           );

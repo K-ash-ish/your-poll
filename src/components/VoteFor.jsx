@@ -12,21 +12,28 @@ function VoteFor(props) {
     JSON.parse(localStorage.getItem("fingerPrint")) || [];
   const navigate = useNavigate();
   function voteCount(e) {
-    const voteFor = e.target.previousSibling.innerText.toLowerCase();
+    const votedFor = e.target.previousSibling.innerText.toLowerCase();
+    console.log(votedFor);
+    const vote = [{ yes: 4 }, { no: 3 }, { nahh: 0 }];
+    const index = vote.findIndex((item) => votedFor in item);
+    console.log(vote, index);
+    console.log();
+
+    // console.log(vote[index][voteFor], vote, voteFor);
     const pollRef = doc(database, "allPolls", docId);
     const localArray = JSON.parse(localStorage.getItem("fingerPrint")) || [];
 
     localArray.push(pollid);
     localStorage.setItem("fingerPrint", JSON.stringify(localArray));
-    updateDoc(
-      pollRef,
-      {
-        [`votes.${voteFor}`]: increment(1),
-      },
-      { merge: true }
-    ).then(() => {
-      navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
-    });
+    console.log(pollRef);
+    updateDoc(pollRef, {
+      [`votes.${votedFor}`]: increment(1),
+      // "votes."
+    })
+      .then(() => {
+        navigate(generatePath("/yourpoll/:pollid/results", { pollid: pollid }));
+      })
+      .catch((err) => console.log(err));
   }
   useEffect(() => {
     if (fingerPrintCheck.includes(pollid)) {

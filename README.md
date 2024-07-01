@@ -1,6 +1,6 @@
 ## Create an anonymous poll with [YourPoll](https://your-poll.netlify.app/) get RealTime vote results.
 
-## ![](gif/pika-1678625402882-1x.png)
+## ![](/public/gif/pika-1678625402882-1x.png)
 
 ---
 
@@ -9,9 +9,9 @@
 - One user can vote only once.
 - Mobile Responsive design.
 
-  ## ![](gif/Picsart_23-03-12_18-22-36-877.jpg)
+  ## ![](/public/gif/Picsart_23-03-12_18-22-36-877.jpg)
 
-  ---
+  ***
 
   Screenshot of [project](Tutorial.md)
 

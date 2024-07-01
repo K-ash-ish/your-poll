@@ -1,5 +1,5 @@
-![](gif/createpoll.gif)
+![](/public/gif/createpoll.gif)
 
-![](gif/navigate.gif)
+![](/public/gif/navigate.gif)
 
-![](gif/vote.gif)
+![](/public/gif/vote.gif)
